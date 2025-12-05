@@ -1,41 +1,191 @@
 <%= layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-    <div class="col-6 offset-3">
-        <h1>SignUp on Wanderlust</h1>
-        <form action="/signup" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input 
-                 name="username"
-                 id="username"
-                 type="text"
-                 class="form-control"
-                 required
-                 />
-                 <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input 
-                 name="email"
-                 id="email"
-                 type="email"
-                 class="form-control"
-                 required
-                 />
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input 
-                 name="password"
-                 id="password"
-                 type="password"
-                 class="form-control"
-                 required
-                 />
-            </div>
-            <button class="btn btn-success">SignUp</button>
-        </form>
+<style>
+  .auth-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00A699 0%, #008B94 100%);
+    margin: -24px -24px 0 -24px;
+    padding: 24px;
+  }
+  
+  .auth-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 48px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .auth-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  
+  .auth-subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  
+  .form-group {
+    margin-bottom: 24px;
+  }
+  
+  .form-label-modern {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .form-control-modern {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 16px;
+    transition: var(--transition);
+    background: #FAFAFA;
+  }
+  
+  .form-control-modern:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 166, 153, 0.1);
+    background: white;
+  }
+  
+  .btn-auth {
+    width: 100%;
+    padding: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    background: var(--secondary-color);
+    color: white;
+    transition: var(--transition);
+  }
+  
+  .btn-auth:hover {
+    background: #008B94;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 166, 153, 0.3);
+  }
+  
+  .auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-light);
+  }
+  
+  .auth-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .auth-link:hover {
+    color: #008B94;
+    text-decoration: underline;
+  }
+  
+  .password-requirements {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .auth-card {
+      padding: 32px 24px;
+    }
+    
+    .auth-container {
+      margin: -16px -16px 0 -16px;
+      padding: 16px;
+    }
+  }
+</style>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Join WanderStay</h1>
+      <p class="auth-subtitle">Create your account to start exploring</p>
     </div>
+    
+    <form action="/signup" method="POST" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="username" class="form-label-modern">Username</label>
+        <input 
+          name="username"
+          id="username"
+          type="text"
+          class="form-control form-control-modern"
+          placeholder="Choose a username"
+          required
+          minlength="3"
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">
+          Please choose a username (minimum 3 characters).
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email" class="form-label-modern">Email Address</label>
+        <input 
+          name="email"
+          id="email"
+          type="email"
+          class="form-control form-control-modern"
+          placeholder="Enter your email"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid email address.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label-modern">Password</label>
+        <input 
+          name="password"
+          id="password"
+          type="password"
+          class="form-control form-control-modern"
+          placeholder="Create a strong password"
+          required
+          minlength="6"
+        />
+        <div class="password-requirements">
+          Password must be at least 6 characters long
+        </div>
+        <div class="invalid-feedback">
+          Please provide a password (minimum 6 characters).
+        </div>
+      </div>
+      
+      <button class="btn btn-auth" type="submit">
+        <i class="fa-solid fa-user-plus me-2"></i>Create Account
+      </button>
+    </form>
+    
+    <div class="auth-footer">
+      <p style="color: var(--text-secondary); margin: 0;">
+        Already have an account? 
+        <a href="/login" class="auth-link">Sign in</a>
+      </p>
+    </div>
+  </div>
 </div>
